@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server -d --inline --hot --env.dev",
-    "build": "rimraf dist && webpack -p --progress --hide-modules"
+    "build": "rimraf dist && webpack -p --progress --hide-modules --display-error-details"
   },
   "dependencies": {
     "element-ui": "^1.1.2",
@@ -24,6 +24,7 @@
     "eslint": "^3.12.2",
     "eslint-config-enough": "^0.2.2",
     "eslint-loader": "^1.6.1",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.9.0",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.24.1",
