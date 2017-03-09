@@ -5,7 +5,7 @@ const webpack = require('webpack')
 const glob = require('glob')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-// const extractCss = new ExtractTextPlugin('assets/css/[name].css')
+const extractCss = new ExtractTextPlugin('assets/css/[name].css')
 const extractHtml = new ExtractTextPlugin('[name].html')
 const url = require('url')
 const publicPath = ''
@@ -23,8 +23,7 @@ module.exports = (options = {}) => {
       ],
       extensions: ['.js', '.vue', '/']
     },
-    entry: {
-    },
+    entry: {},
     output: {
       path: resolve(__dirname, 'dist'),
       filename: options.dev ? 'assets/js/[name].js' : 'assets/js/[name].js?[chunkhash]',
@@ -34,7 +33,31 @@ module.exports = (options = {}) => {
     module: {
       rules: [{
           test: /\.vue$/,
-          use: ['vue-loader']
+          loader: 'vue-loader',
+          options: {
+            loaders: {
+              css: extractCss.extract({
+                fallback: 'vue-style-loader',
+                use: [{
+                  loader: 'css-loader',
+                  options: {
+                    minimize: true
+                  }
+                }]
+              }),
+              scss: extractCss.extract({
+                fallback: 'vue-style-loader',
+                use: [{
+                    loader: 'css-loader',
+                    options: {
+                      minimize: true
+                    }
+                  },
+                  'sass-loader'
+                ]
+              })
+            }
+          }
         },
         {
           test: /\.js$/,
@@ -98,7 +121,7 @@ module.exports = (options = {}) => {
       // new HtmlWebpackPlugin({
       //   template: 'src/index.html'
       // }),
-      // extractCss,
+      extractCss,
       extractHtml
     ],
 
