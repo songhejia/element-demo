@@ -70,9 +70,7 @@ module.exports = (options = {}) => {
           use: [{
             loader: 'html-loader',
             options: {
-              minimize: true,
-              root: resolve(__dirname, 'src'),
-              attrs: ['img:src', 'link:href']
+              minimize: true
             }
           }]
         },
@@ -82,9 +80,7 @@ module.exports = (options = {}) => {
             use: [{
               loader: 'html-loader',
               options: {
-                minimize: true,
-                root: resolve(__dirname, 'src'),
-                attrs: ['img:src', 'link:href']
+                minimize: true
               }
             }]
           })
